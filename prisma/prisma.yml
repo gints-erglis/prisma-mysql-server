@@ -1,4 +1,8 @@
 
+# For the fresh project or for the change endpoint define an empty endpoint
+# endpoint: ''
+endpoint: http://localhost:4466/default/dev
+
 datamodel: datamodel.prisma
 
 generate:
@@ -10,5 +14,3 @@ hooks:
     - prisma generate
 
 
-
-endpoint: http://localhost:4466/hackernews/dev
