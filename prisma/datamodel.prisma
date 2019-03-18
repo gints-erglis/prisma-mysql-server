@@ -1,0 +1,17 @@
+
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String!
+  profile: Profile @relation(name: "ToProfile", onDelete: CASCADE)
+}
+
+type Profile {
+  id: ID! @unique
+  firstName: String
+  lastName: String
+  phone: String
+  address: String
+  user: User @relation(name: "ToProfile", onDelete: SET_NULL)
+}

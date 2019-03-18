@@ -1,0 +1,50 @@
+
+type Query {
+  info: String!
+    logedin: isAuth
+    logout: isAuth
+}
+
+type Mutation {
+  login(email: String!, password: String!): AuthPayload
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  newProfile(firstName: String!, lastName: String!, phone: String, address: String): ProfilePayload
+}
+
+type User {
+  id: ID!
+    name: String!
+    email: String!
+    password: String!
+  profile: Profile
+}
+
+type isAuth {
+  ok: Boolean
+}
+
+type AuthPayload {
+  user: User
+}
+
+type ProfilePayload {
+  profile: Profile
+}
+
+type Profile {
+  id: ID!
+    firstName: String!
+    lastName: String!
+    phone: String
+  address: String
+  user: User
+}
+
+enum LinkOrderByInput {
+  description_ASC
+  description_DESC
+  url_ASC
+  url_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
