@@ -18,9 +18,12 @@ async function signup(parent, args, context, info) {
     }
   })
 
+  // In case you use a session cookie
   context.request.session.userId = user.id;
 
   return {
+    // In case you use a token
+    token: jwt.sign({ userId: user.id }, APP_SECRET),
     user,
   }
 }
@@ -44,10 +47,12 @@ async function login(parent, args, context, info) {
   if (!valid) {
     throw new Error('Invalid password')
   }
-
+  // In case you use a session cookie
   context.request.session.userId = user.id;
 
   return {
+    // In case you use a token
+    token: jwt.sign({ userId: user.id }, APP_SECRET),
     user,
   }
 }

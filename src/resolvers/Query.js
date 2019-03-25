@@ -1,4 +1,4 @@
-const { getUserId } = require('../utils')
+const { getUserId, getUserIdByToken } = require('../utils')
 
 
 async function logedin(parent, args, context, info) {
@@ -8,9 +8,18 @@ async function logedin(parent, args, context, info) {
   if (userId) {
     return {ok: true}
   }
-
   return {ok: false}
+}
 
+// If using a JWT
+async function logedinToken(parent, args, context, info) {
+
+  const userId = getUserIdByToken(context)
+
+  if (userId) {
+    return {ok: true}
+  }
+  return {ok: false}
 }
 
 async function logout(parent, args, context, info) {
@@ -23,5 +32,6 @@ async function logout(parent, args, context, info) {
 
 module.exports = {
   logedin,
+  logedinToken,
   logout,
 }

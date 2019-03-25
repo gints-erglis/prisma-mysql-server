@@ -1,8 +1,8 @@
 
 type Query {
-  info: String!
-    logedin: isAuth
-    logout: isAuth
+  logedin: isAuth
+  logedinToken: isAuth
+  logout: isAuth
 }
 
 type Mutation {
@@ -24,6 +24,7 @@ type isAuth {
 }
 
 type AuthPayload {
+  token: String!
   user: User
 }
 
