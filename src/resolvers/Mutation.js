@@ -27,9 +27,19 @@ async function signup(parent, args, context, info) {
     user,
   }
 }
+
 async function newProfile(parent, args, context, info) {
 
   const profile = await context.prisma.createProfile({ ...args })
+
+  return {
+    profile
+  }
+}
+
+async function editProfile(parent, args, context, info) {
+
+  const profile = await context.prisma.updateProfile({ ...args })
 
   return {
     profile
@@ -61,4 +71,5 @@ module.exports = {
   signup,
   login,
   newProfile,
+  editProfile
 }

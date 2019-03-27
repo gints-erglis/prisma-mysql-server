@@ -3,12 +3,14 @@ type Query {
   logedin: isAuth
   logedinToken: isAuth
   logout: isAuth
+  getUser(id: ID!): User
 }
 
 type Mutation {
   login(email: String!, password: String!): AuthPayload
   signup(email: String!, password: String!, name: String!): AuthPayload
   newProfile(firstName: String!, lastName: String!, phone: String, address: String): ProfilePayload
+  editProfile(firstName: String!, lastName: String!, phone: String, address: String): ProfilePayload
 }
 
 type User {
@@ -21,6 +23,7 @@ type User {
 
 type isAuth {
   ok: Boolean
+  id: String
 }
 
 type AuthPayload {

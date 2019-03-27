@@ -6,7 +6,10 @@ async function logedin(parent, args, context, info) {
   const userId = getUserId(context)
 
   if (userId) {
-    return {ok: true}
+    return {
+      ok: true,
+      id: userId
+    }
   }
   return {ok: false}
 }
@@ -30,8 +33,14 @@ async function logout(parent, args, context, info) {
 
 }
 
+async function getUser(parent, args, context, info) {
+  const user = await context.prisma.user({ id: args.id })
+  return user
+}
+
 module.exports = {
   logedin,
   logedinToken,
   logout,
+  getUser,
 }
