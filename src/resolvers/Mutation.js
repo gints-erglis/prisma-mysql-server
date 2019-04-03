@@ -60,6 +60,8 @@ async function login(parent, args, context, info) {
   // In case you use a session cookie
   context.request.session.userId = user.id;
 
+  //context.response.cookie('id', user.id, { signed: true, httpOnly: true });
+
   return {
     // In case you use a token
     token: jwt.sign({ userId: user.id }, APP_SECRET),

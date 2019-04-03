@@ -1,6 +1,7 @@
 const { GraphQLServer } = require('graphql-yoga')
 const { prisma } = require('./generated/prisma-client')
 const session = require('express-session')
+const cookieParser = require('cookie-parser')
 const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
 const User = require('./resolvers/User')
@@ -27,17 +28,21 @@ const server = new GraphQLServer({
 const SESSION_SECRET = "lsdfjlkjlkewaqra";
 
 server.express.use(session({
-    name: "qid",
+    key: "id",
     secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
+      path: '/',
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       maxAge: 1000 * 60 * 60 * 24 * 7
     }
   })
 );
+
+server.use(cookieParser(SESSION_SECRET));
+
 
 const cors = {
   credentials: true,

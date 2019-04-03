@@ -27,7 +27,11 @@ async function logedinToken(parent, args, context, info) {
 
 async function logout(parent, args, context, info) {
 
-  delete context.request.session.userId;
+  context.request.session.destroy();
+  // forse creating a new session ID
+  delete context.request.session;
+  // delete a browser cookie
+  context.response.clearCookie('id', {path: '/' });
 
   return {ok: true}
 
